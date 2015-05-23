@@ -1,15 +1,15 @@
 ---
-title       : Redwood City Real Estate Estimator
-subtitle    : How To Buy A New House Smartly
-author      : Saoirsegirl
-job         : Class 09 Developing Data Products
+title       : test
+subtitle    : match Ramnath
+author      : Barb
+job         : confused
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
-widgets     : [bootstrap]            # {mathjax, quiz, bootstrap}
+widgets     : []            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
----  
+---
 
 ## Read-And-Delete
 
@@ -20,7 +20,9 @@ knit        : slidify::knit2slides
 --- .class #id 
 
 ## Slide 2
+Maybe I need something here?
 
+---
 
 
 
