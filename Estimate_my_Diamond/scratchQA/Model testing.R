@@ -7,7 +7,7 @@ modelDia_glm <- fitDia_glm$coefficients
 
 # Fit Model using factor -> numeric coefficient approach - On 4 Predictors
 fitDia_Nglm <- glm(price ~ carat + as.numeric(cut) + as.numeric(color) + 
-                     as.numeric(clarity), data = data4model)
+                     as.numeric(clarity), data = Dia)
 
 modelDia_Nglm <- fitDia_Nglm$coefficients
 
@@ -40,37 +40,50 @@ summary(fitDia_Nglm2)
 predictors <- c("Intercept", "Carat", "Cut.Fair", "Cut.Good", )
 var(fitDia_Nglm2$residuals)
 
-# Plot Residuals for glm on limited data with ordered factor (polynomial) predictors
-resXY_glm <- data.frame(Price = data4model$price, Res = fitDia_glm$residuals)
-resLoess_glm <- loess(Res ~ Price, data = resXY_glm, )
-resPredict_glm <- predict(resLoess_glm)
-i <- order(as.vector(resXY_glm$Price))
-
-plot(resXY_glm, col = as.numeric(data4model$color))
-legend("bottomleft", legend = LETTERS[4:10], pch = 19, col = 1:7)
-abline(h = 0, lwd = "2")
-lines(resXY_glm$Price[i], resPredict_glm[i], col='red', lwd = 2)
+# # Plot Residuals for glm on limited data with ordered factor (polynomial) predictors
+# resXY_glm <- data.frame(Price = data4model$price, Res = fitDia_glm$residuals)
+# resLoess_glm <- loess(Res ~ Price, data = resXY_glm, )
+# resPredict_glm <- predict(resLoess_glm)
+# i <- order(as.vector(resXY_glm$Price))
+# 
+# plot(resXY_glm, col = as.numeric(data4model$color))
+# legend("bottomleft", legend = LETTERS[4:10], pch = 19, col = 1:7)
+# abline(h = 0, lwd = "2")
+# lines(resXY_glm$Price[i], resPredict_glm[i], col='red', lwd = 2)
 
 # Plot Residuals for glm on limited data with numeric predictors
-resXY_Nglm <- data.frame(Price = data4model$price, Res = fitDia_Nglm$residuals)
+resXY_Nglm <- data.frame(Price = Dia$price, Res = fitDia_Nglm$residuals)
 resLoess_Nglm <- loess(Res ~ Price, data = resXY_Nglm, )
 resPredict_Nglm <- predict(resLoess_Nglm)
 i <- order(as.vector(resXY_Nglm$Price))
 
-plot(resXY_Nglm, col = as.numeric(data4model$color, main = "GLM Model Using As.Numeric(Classifiers)"))
+plot(resXY_Nglm, col = as.numeric(Dia$color, main = "GLM Model Using As.Numeric(Classifiers)"))
 legend("bottomleft", legend = LETTERS[4:10], pch = 19, col = 1:7)
 abline(h = 0, lwd = "2")
 lines(resXY_Nglm$Price[i], resPredict_Nglm[i], col='red', lwd = 2)
 
-# Plot Residuals for glm on all meaningfull data with numeric predictors
-resXY_N2glm <- data.frame(Price = data4model$price, Res = fitDia_Nglm2$residuals)
-resLoess_N2glm <- loess(Res ~ Price, data = resXY_N2glm, )
-resPredict_N2glm <- predict(resLoess_N2glm)
-i <- order(as.vector(resXY_N2glm$Price))
-
-plot(data4model$price, fitDia_Nglm2$residuals, 
-     main='GLM Model Using as.Numeric(Classifiers) and Numeric Predictors',
-     col = as.numeric(data4model$color))
-legend("bottomleft", legend = LETTERS[4:10], pch = 19, col = 1:7)
+# Plot Residuals for glm on limited data with numeric predictors  -- Clarity
+plot(resXY_Nglm, col = as.numeric(Dia$clarity, main = "GLM Model Using As.Numeric(Classifiers)"))
+legend("bottomleft", legend = LETTERS[4:10], pch = 19, col = 1:5)
 abline(h = 0, lwd = "2")
-lines(resXY_N2glm$Price[i], resPredict_Nglm[i], col='red', lwd = 2)
+lines(resXY_Nglm$Price[i], resPredict_Nglm[i], col='red', lwd = 2)
+
+# Plot Residuals for glm on limited data with numeric predictors  -- Clarity
+plot(resXY_Nglm, col = as.numeric(Dia$cut, main = "GLM Model Using As.Numeric(Classifiers)"))
+legend("bottomleft", legend = LETTERS[4:10], pch = 19, col = 1:5)
+abline(h = 0, lwd = "2")
+lines(resXY_Nglm$Price[i], resPredict_Nglm[i], col='red', lwd = 2)
+
+
+# # Plot Residuals for glm on all meaningfull data with numeric predictors
+# resXY_N2glm <- data.frame(Price = data4model$price, Res = fitDia_Nglm2$residuals)
+# resLoess_N2glm <- loess(Res ~ Price, data = resXY_N2glm, )
+# resPredict_N2glm <- predict(resLoess_N2glm)
+# i <- order(as.vector(resXY_N2glm$Price))
+# 
+# plot(data4model$price, fitDia_Nglm2$residuals, 
+#      main='GLM Model Using as.Numeric(Classifiers) and Numeric Predictors',
+#      col = as.numeric(data4model$color))
+# legend("bottomleft", legend = LETTERS[4:10], pch = 19, col = 1:7)
+# abline(h = 0, lwd = "2")
+# lines(resXY_N2glm$Price[i], resPredict_Nglm[i], col='red', lwd = 2)
